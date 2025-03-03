@@ -1,0 +1,26 @@
+function OptimizerToggle(value)
+    print("Optimizer:", value)
+    
+    local lighting = game:GetService("Lighting") -- Ensure lighting is properly referenced
+
+    if value then
+        lighting.GlobalShadows = false
+        lighting.Brightness = 0
+        lighting.FogEnd = 9e9
+        for _, v in pairs(workspace:GetDescendants()) do
+            if v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Fire") then
+                v.Enabled = false
+            end
+        end
+    else
+        lighting.GlobalShadows = true
+        lighting.Brightness = 2
+        lighting.FogEnd = 10000
+        for _, v in pairs(workspace:GetDescendants()) do
+            if v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Fire") then
+                v.Enabled = true
+            end
+        end
+    end
+end
+
